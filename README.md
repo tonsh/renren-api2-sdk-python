@@ -3,7 +3,7 @@
 ## OAuth2.0 认证
 
 ### 配置
-* 修改如下配置信息为您的应用信息 config.cfg：
+修改如下配置信息为您的应用信息 config.cfg：
 
 	[app]
 	app-key = your_app_key
