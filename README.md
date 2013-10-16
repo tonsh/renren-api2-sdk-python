@@ -1,33 +1,41 @@
 #人人 API2.0 Python SDK
 
-## OAuth2.0 认证
-
-### 配置
-修改如下配置信息为您的应用信息 config.cfg：
+## Oauth2.0 认证
+配置 config.cfg
 
 	[app]
 	app-key = your_app_key
 	app-secret = your_app_secret
 	auth-redirect-uri = your_application_authorize_redirect_ur
-	
+
 	[token]
 	type = mac # or bearer
 
 	[logger]
 	filename = the_logger_file_path
 	
-###认证	
-仅需指定配置文件所在的位置即可。
 
-	client = new RenrenClient(config.cfg)
-	auth_url = client.authorize_url
-	… …
+实例化 RenrenClient:
+
+	client = RenrenClient('/yourpath/config.cfg')
+	
+获取授权链接:
+
+	url = client.authorize_url
+	
+通过 Code 认证:
+
 	client.auth_with_code(code)
-	# or if you have the access_token
-	# if you config the token type is mac
-	#client.auth_with_token(mac_token, mac_key, mac_algorithm) 
-	#if you config the token type is bearer
-	#client.auth_with_token(bearer_token, refresh_token) 
+	
+OR 已经获取了 token, 则通过 token 认证:
+
+	# if config token type is mac
+	client.auth_with_token(mac_token, mac_key, mac_algorithm)
+	
+	# if config token type is bearer
+	# client.auth_with_token(bearer_token, refresh_token)
+	
+至此完成认证！
    
 ### API 调用
 调用 client 对象的 http 方法，传入需要调用的接口API及参数。您不必关心发起 HTTP 请求的方法，client 会根据您传入接口自动判断。
