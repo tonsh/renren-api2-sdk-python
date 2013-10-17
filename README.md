@@ -19,10 +19,10 @@
 	```
 	
 
-1. 实例化 RenrenClient:
+1. 实例化 RenrenClient(单例):
 
 	```
-	client = RenrenClient('/yourpath/config.cfg')
+	client = RenrenClient.instance('/yourpath/config.cfg')
 	```
 	
 1. 获取授权链接:

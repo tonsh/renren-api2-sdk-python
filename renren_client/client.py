@@ -66,6 +66,7 @@ class RenrenClient(object):
     """
 
     OAUTH_HOST = "https://graph.renren.com/oauth"
+    _instance = None
 
     def __init__(self, config_file):
         config = ConfigParser()
@@ -77,6 +78,13 @@ class RenrenClient(object):
         self.token_type = config.get('token', 'type')
         
         self.log_filename = config.get('logger', 'filename')
+
+    @classmethod
+    def instance(cls, config_file):
+        if not cls._instance:
+            cls._instance = cls(config_file)
+
+        return cls._instance
 
     def __repr__(self):
         return '<RenrenClient Class>'
