@@ -23,9 +23,8 @@ def logger_record(func):
         try:
             return func(*args, **kargs)
         except Exception:
-            msg = "funciton: %s" % func
-            msg += "params: %s %s" % (''.join(args), urllib.urlencode(kargs))
-            msg += traceback.format_exc()
+            msg = "%s %s %s %s" % (func, ''.join(args), urllib.urlencode(kargs),
+                                    traceback.format_exc())
             logging.error(msg)
             raise
 
@@ -44,18 +43,17 @@ def logger_api(func):
         try:
             rst = func(inst, uri, **params)
 
-            if isinstance(rst, dict) and rst.get('error_code', None):
-                code = result.get('error_code')
-                msg = result.get('error_msg', u'错误').encode('utf-8')
-
-                raise RenrenAPIError(code, msg)
+            if isinstance(rst, dict):
+                error = rst.get('error', None)
+                if error:
+                    code = error.get('code')
+                    msg = error.get('message', u'错误')
+                    raise RenrenAPIError(code, msg)
 
             return rst
         except Exception:
-            msg = "API Request Error: "
-            msg = "uri %s" % uri
-            msg += "params: %s" % urllib.urlencode(params)
-            msg += traceback.format_exc()
+            msg = "%s %s %s" % (uri, urllib.urlencode(params),
+                                traceback.format_exc())
             logging.error(msg)
             raise
 
