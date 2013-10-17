@@ -1,56 +1,5 @@
 # Renren API2.0 使用说明
-
-## Oauth2.0 认证
-使用 renren-api2.0-python-sdk 授权流程
-
-1. 配置 config.cfg
-
-	```
-	[app]
-	app-key = your_app_key
-	app-secret = your_app_secret
-	auth-redirect-uri = your_application_authorize_redirect_ur
-
-	[token]
-	type = mac # or bearer
-
-	[logger]
-	filename = the_logger_file_path
-	```
-	
-
-1. 实例化 RenrenClient:
-
-	```
-	client = RenrenClient('/yourpath/config.cfg')
-	```
-	
-1. 获取授权链接:
-
-	```
-	url = client.authorize_url
-	```
-	
-1. 通过 Code 认证:
-
-	```
-	client.auth_with_code(code)
-	```
-	
-  OR 已经获取了 token, 则通过 token 认证:
-
-	```
-	# if config token type is mac
-	client.auth_with_token(mac_token, mac_key, mac_algorithm)
-	
-	# if config token type is bearer
-	# client.auth_with_token(bearer_token, refresh_token)
-	```
-	
-至此完成认证！
-
-
-   
+ 
 ## API 调用
 
 	from api import RenrenAPI
@@ -66,12 +15,12 @@
  	feed_type | string | Y | 新鲜事类型, 不区分大小写<br/>TYPE_ALL 全部类型<br/>TYPE_IMAGE 照片类型<br/>TYPE_CHECKIN 签到类型<br/>TYPE_STATUS 状态类型<br/>TYPE_POINT 地点评价类型
  	longitude | double | Y | 经度。取值范围 -180 ～ 180
  	latitude | double | Y | 纬度。取值范围 -90 ~ 90
- 	radius | int | N | 半径,500-2000米
+ 	radius | int | N | 半径,500-2000米	
  	page_size | int | N |页面大小。取值范围1-100，默认大小20 
  	page_number | int | N | 页码。取值大于零，默认值为1
 
  	
- 1. #### 根据经纬度定位地点
+1. #### 根据经纬度定位地点
    由于权限问题，暂未实现！
 	
 ### 调用 Album API
@@ -134,7 +83,7 @@
  	blog_id | long | Y | 日志的ID
  	password | string | N | 日志访问密码, 默认 None
  	
- 1. #### 获取某日志的评论列表
+1. #### 获取某日志的评论列表
  	```
  	api.blog.get_comments(owner_id, album_id, page_size,page=1, desc)
  	```
@@ -150,7 +99,6 @@
 	暂未实现
 
 ### 调用 Evaluation API
-未测试，暂未实现
 
 1. ####  签到回复列表 
 	```
@@ -438,7 +386,4 @@
 	参数 | 类型 | 必选 | 描述 
 	--- | --- | --- | --- 
 	uid | long | Y | 用户ID
-	
-	
 
-### 调用
