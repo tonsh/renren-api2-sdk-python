@@ -99,7 +99,11 @@ class MacToken(AbsToken):
         if params:
             params = urllib.urlencode(params)
         request = urllib2.Request(url, data=params, headers=headers)
-        response = urllib2.urlopen(request)
+
+        try:
+            response = urllib2.urlopen(request)
+        except urllib2.HTTPError, e:
+            response = e
 
         return json.loads(response.read())
 
@@ -121,6 +125,9 @@ class BearerToken(AbsToken):
         if params:
             params = urllib.urlencode(params)
         request = urllib2.Request(url, data=params, headers=headers)
-        response = urllib2.urlopen(request)
+        try:
+            response = urllib2.urlopen(request)
+        except urllib2.HTTPError, e:
+            response = e
 
         return json.loads(response.read())
