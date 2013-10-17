@@ -99,8 +99,6 @@
 	暂未实现
 
 ### 调用 Evaluation API
-未测试，暂未实现
-
 1. ####  签到回复列表 
 	```
 	api.evaluation.get_replies(owner_id, evaluation_id, page_size, page)
