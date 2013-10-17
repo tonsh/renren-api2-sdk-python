@@ -1,56 +1,5 @@
 # Renren API2.0 使用说明
 
-## Oauth2.0 认证
-使用 renren-api2.0-python-sdk 授权流程
-
-1. 配置 config.cfg
-
-	```
-	[app]
-	app-key = your_app_key
-	app-secret = your_app_secret
-	auth-redirect-uri = your_application_authorize_redirect_ur
-
-	[token]
-	type = mac # or bearer
-
-	[logger]
-	filename = the_logger_file_path
-	```
-	
-
-1. 实例化 RenrenClient:
-
-	```
-	client = RenrenClient('/yourpath/config.cfg')
-	```
-	
-1. 获取授权链接:
-
-	```
-	url = client.authorize_url
-	```
-	
-1. 通过 Code 认证:
-
-	```
-	client.auth_with_code(code)
-	```
-	
-  OR 已经获取了 token, 则通过 token 认证:
-
-	```
-	# if config token type is mac
-	client.auth_with_token(mac_token, mac_key, mac_algorithm)
-	
-	# if config token type is bearer
-	# client.auth_with_token(bearer_token, refresh_token)
-	```
-	
-至此完成认证！
-
-
-   
 ## API 调用
 
 	from api import RenrenAPI
