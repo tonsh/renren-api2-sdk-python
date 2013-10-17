@@ -1,5 +1,5 @@
 # Renren API2.0 使用说明
- 
+
 ## API 调用
 
 	from api import RenrenAPI
@@ -94,12 +94,11 @@
 	page_size | int | N | 页面大小。取值范围1-100，默认大小20
  	page | int | N | 页码。取值大于零，默认值为1 
 	desc | boolean | N | 是否降序, 默认:true。<br/>true：按评论时间降序；<br/>false：按评论时间升序;
-	
+
 1. #### 创建一篇日志
 	暂未实现
 
 ### 调用 Evaluation API
-
 1. ####  签到回复列表 
 	```
 	api.evaluation.get_replies(owner_id, evaluation_id, page_size, page)
