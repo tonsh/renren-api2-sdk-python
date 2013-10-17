@@ -81,6 +81,18 @@ class RenrenClient(object):
     def __repr__(self):
         return '<RenrenClient Class>'
 
+    def reset_token(self, response):
+        params = {
+            'bearer_token': response.get('access_token'),
+            'refresh_token': response.get('refresh_token'),
+            'mac_algorithm': response.get('mac_algorithm'),
+            'mac_token': response.get('access_token'),
+            'mac_key': response.get('mac_key'),
+            'mac_algorithm': response.get('mac_algorithm'),
+        }
+
+        self.token = AccessToken(self.token_type, **params)
+
     @property
     def authorize_url(self):
         url = "%s/authorize?response_type=code&client_id=%s&redirect_uri=%s" % (
@@ -99,15 +111,7 @@ class RenrenClient(object):
         url = "%s/token?%s" % (self.OAUTH_HOST, urllib.urlencode(params))
         response = eval(urllib2.urlopen(url).read())
 
-        params = {
-            'bearer_token': response.get('access_token'),
-            'refresh_token': response.get('refresh_token'),
-            'mac_algorithm': response.get('mac_algorithm'),
-            'mac_token': response.get('access_token'),
-            'mac_key': response.get('mac_key'),
-            'mac_algorithm': response.get('mac_algorithm'),
-        }
-        self.token = AccessToken(self.token_type, **params)
+        self.reset_token(response)
 
         return response
 
@@ -134,7 +138,11 @@ class RenrenClient(object):
         }
         url = "%s/token?%s" % (self.OAUTH_HOST, urllib.urlencode(params))
 
-        return json.loads(urllib2.urlopen(url).read())
+        response = json.loads(urllib2.urlopen(url).read())
+
+        self.reset_token(response)
+
+        return response
     
     @logger_api
     def http(self, uri, **params):

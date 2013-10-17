@@ -17,5 +17,7 @@ class Service(object):
                 return self.client.http(uri, **params)
             if e.code == ErrorCode.EXPIRED_TOKEN:
                 self.client.refresh()
+                return self.client.http(uri, **params)
         else:
             return None
+
