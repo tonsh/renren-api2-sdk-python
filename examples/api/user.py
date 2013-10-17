@@ -6,11 +6,15 @@ class User(Service):
     
     def get(self, uid):
         """ 获取用户信息 """
-        return self.http('/v2/user/get', userId=uid)
+        user = self.http('/v2/user/get', userId=uid) or {}
+
+        return user.get('response')
 
     def profile(self, uid):
         """ 获取用户的主页信息，包括各种统计数据 """
-        return self.http('/v2/profile/get', userId=uid)
+        profile = self.http('/v2/profile/get', userId=uid) or {}
+
+        return profile.get('response')
 
     def batch(self, uids):
         """ 批量获取用户信息
