@@ -117,7 +117,7 @@ class RenrenClient(object):
             'code': code,
         }
         url = "%s/token?%s" % (self.OAUTH_HOST, urllib.urlencode(params))
-        response = eval(urllib2.urlopen(url).read())
+        response = json.loads(urllib2.urlopen(url).read())
 
         self.reset_token(response)
 
