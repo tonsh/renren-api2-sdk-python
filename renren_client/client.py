@@ -13,10 +13,11 @@ from error import ErrorCode, RenrenAPIError
 def logger_record(func):
     def wrapper(*args, **kargs):
         log_filename = args[0].log_filename
+        log_level = args[0].log_level
 
         logging.basicConfig(
             filename=log_filename,
-            level=logging.NOTSET,
+            level=log_level,
             format="%(asctime)s - %(levelname)s: %(message)s"
         )
 
@@ -78,6 +79,7 @@ class RenrenClient(object):
         self.token_type = config.get('token', 'type')
         
         self.log_filename = config.get('logger', 'filename')
+        self.log_level = config.get('logger', 'level').upper()
 
     @classmethod
     def instance(cls, config_file):

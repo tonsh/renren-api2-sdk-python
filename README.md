@@ -16,8 +16,11 @@
 
 	[logger]
 	filename = the_logger_file_path
+	level = NOTSET
 	```
 	
+	logger.level 日志级别， 默认输入所有信息; 级别由高到低：
+	CRITICAL，ERROR， WARNING，INFO，DEBUG，NOTSET
 
 1. 实例化 RenrenClient(单例):
 
