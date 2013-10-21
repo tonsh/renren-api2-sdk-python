@@ -1,5 +1,17 @@
 #人人 API2.0 Python SDK
 
+## 安装
+```
+pip install renren_client
+```
+
+或
+
+```
+easy_install renren_client
+```
+
+
 ## Oauth2.0 认证
 使用 renren-api2.0-python-sdk 授权流程
 
@@ -40,7 +52,7 @@
 	client.auth_with_code(code)
 	```
 	
-  OR 已经获取了 token, 则通过 token 认证:
+  或 已经获取了 token, 则通过 token 认证:
 
 	```
 	# if config token type is mac
