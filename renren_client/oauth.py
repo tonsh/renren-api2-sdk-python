@@ -89,6 +89,10 @@ class MacToken(AbsToken):
         import hmac
         import hashlib
 
+        # key must be string, but not unicode or None
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+
         return hmac.new(key, base_str, hashlib.sha1).digest().encode('base64').rstrip()
 
     def _call(self, method, uri, params=None):
